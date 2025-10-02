@@ -8,9 +8,13 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Umrah Guide">
     <meta name="description" content="Complete step-by-step Umrah guide with duas">
-    <title>Umrah Guide - PWA</title>
-    <link rel="apple-touch-icon" href="IMG_7890.jpeg">
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlVtcmFoIFNlbGYtR3VpZGUiLAogICJzaG9ydF9uYW1lIjogIlVtcmFoIiwKICAiZGVzY3JpcHRpb24iOiAiQ29tcGxldGUgc3RlcC1ieS1zdGVwIFVtcmFoIGd1aWRlIHdpdGggZHVhcyIsCiAgInN0YXJ0X3VybCI6ICIvIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMmQ4NjU5IiwKICAidGhlbWVfY29sb3IiOiAiIzJkODY1OSIsCiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJyUzRSUzQ3JlY3Qgd2lkdGg9JzEwMCcgaGVpZ2h0PScxMDAnIGZpbGw9JyUyMzJkODY1OScvJTNFJTNDdGV4dCB4PSc1MCUyNScgeT0nNTAlMjUnIGZvbnQtc2l6ZT0nNTAnIGZpbGw9J3doaXRlJyUzRSVFRiVBNyU4QiUzQy90ZXh0JTNFJTNDL3N2ZyUzRSIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJyUzRSUzQ3JlY3Qgd2lkdGg9JzEwMCcgaGVpZ2h0PScxMDAnIGZpbGw9JyUyMzJkODY1OScvJTNFJTNDdGV4dCB4PSc1MCUyNScgeT0nNTAlMjUnIGZvbnQtc2l6ZT0nNTAnIGZpbGw9J3doaXRlJyUzRSVFRiVBNyU4QiUzQy90ZXh0JTNFJTNDL3N2ZyUzRSIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0KICBdCn0=">
+    <title>Umrah Guide - Complete</title>
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="apple-touch-icon.png">
+    
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlVtcmFoIFNlbGYtR3VpZGUiLAogICJzaG9ydF9uYW1lIjogIlVtcmFoIiwKICAiZGVzY3JpcHRpb24iOiAiQ29tcGxldGUgc3RlcC1ieS1zdGVwIFVtcmFoIGd1aWRlIHdpdGggZHVhcyIsCiAgInN0YXJ0X3VybCI6ICIuLyIsCiAgInNjb3BlIjogIi4vIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMmQ4NjU5IiwKICAidGhlbWVfY29sb3IiOiAiIzJkODY1OSIsCiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiYXBwbGUtdG91Y2gtaWNvbi5wbmciLAogICAgICAic2l6ZXMiOiAiMTkyeDE5MiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiYXBwbGUtdG91Y2gtaWNvbi5wbmciLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIKICAgIH0KICBdCn0=">
     <style>
         * {
             margin: 0;
@@ -39,6 +43,7 @@
             gap: 15px;
             z-index: 1000;
             animation: slideUp 0.5s;
+            max-width: 90%;
         }
         
         .install-prompt.show {
@@ -270,18 +275,49 @@
         .dua-label {
             font-weight: bold;
             color: #9c640c;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             font-size: 0.95em;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         
+        .dua-arabic {
+            font-size: 1.5em;
+            color: #1a5f3f;
+            font-weight: 700;
+            line-height: 2.2;
+            text-align: right;
+            direction: rtl;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 8px;
+            font-family: 'Traditional Arabic', 'Arabic Typesetting', 'Geeza Pro', 'Amiri', serif;
+        }
+        
         .dua-text {
-            font-size: 1.15em;
+            font-size: 1.05em;
             color: #1a5f3f;
             font-weight: 600;
             line-height: 1.8;
             font-style: italic;
+            margin-bottom: 12px;
+        }
+        
+        .dua-meaning {
+            font-size: 0.95em;
+            color: #555;
+            line-height: 1.7;
+            padding-top: 12px;
+            border-top: 2px solid #f4d03f;
+        }
+        
+        .meaning-label {
+            font-weight: 700;
+            color: #9c640c;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         .note {
@@ -380,7 +416,7 @@
     <div class="container">
         <div class="header">
             <h1>🕋 Umrah Self-Guide</h1>
-            <p>A Complete Step-by-Step Guide with Essential Duas</p>
+            <p>Complete Step-by-Step Guide with Duas in Arabic, Transliteration & Meaning</p>
         </div>
         
         <div class="content">
@@ -427,7 +463,11 @@
                 </div>
                 <div class="dua-box">
                     <div class="dua-label">🤲 Niyat for Umrah</div>
+                    <div class="dua-arabic">لَبَّيْكَ اللَّهُمَّ عُمْرَةً</div>
                     <div class="dua-text">Labbayka Allāhumma Umrah</div>
+                    <div class="dua-meaning">
+                        <span class="meaning-label">Meaning:</span> Here I am, O Allah, for Umrah
+                    </div>
                 </div>
                 
                 <div class="substep">
@@ -436,7 +476,11 @@
                 </div>
                 <div class="dua-box">
                     <div class="dua-label">🤲 Talbiyah</div>
+                    <div class="dua-arabic">لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ</div>
                     <div class="dua-text">Labbayka Allāhumma labbayk, labbayka lā sharīka laka labbayk, inna-l-ḥamda wan-niʿmata laka wal-mulk, lā sharīka lak</div>
+                    <div class="dua-meaning">
+                        <span class="meaning-label">Meaning:</span> Here I am, O Allah, here I am. Here I am, You have no partner, here I am. Verily all praise, grace and sovereignty belong to You. You have no partner.
+                    </div>
                 </div>
                 
                 <div class="nav-buttons">
@@ -466,7 +510,11 @@
                     </div>
                     <div class="dua-box">
                         <div class="dua-label">🤲 Entering Masjid Dua</div>
+                        <div class="dua-arabic">اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ</div>
                         <div class="dua-text">Allahumma-ftaḥ lī abwaba raḥmatika</div>
+                        <div class="dua-meaning">
+                            <span class="meaning-label">Meaning:</span> O Allah, open for me the doors of Your mercy
+                        </div>
                     </div>
                     
                     <div class="substep">
@@ -485,7 +533,11 @@
                     </div>
                     <div class="dua-box">
                         <div class="dua-label">🤲 Starting Each Round</div>
+                        <div class="dua-arabic">بِسْمِ اللهِ، اللهُ أَكْبَرُ</div>
                         <div class="dua-text">Bismillāh, Allāhu akbar</div>
+                        <div class="dua-meaning">
+                            <span class="meaning-label">Meaning:</span> In the name of Allah, Allah is the Greatest
+                        </div>
                     </div>
                     
                     <div class="substep">
@@ -504,7 +556,11 @@
                     </div>
                     <div class="dua-box">
                         <div class="dua-label">🤲 Between Rukn al-Yamani & Black Stone</div>
+                        <div class="dua-arabic">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</div>
                         <div class="dua-text">Rabbana ātinā fi-d-dunyā ḥasanah, wa fi-l-ākhirati ḥasanah, wa qinā ʿadhāba-n-nār</div>
+                        <div class="dua-meaning">
+                            <span class="meaning-label">Meaning:</span> Our Lord, give us goodness in this world and goodness in the Hereafter, and protect us from the punishment of the Fire
+                        </div>
                     </div>
                     
                     <div class="note">
@@ -524,7 +580,11 @@
                     </div>
                     <div class="dua-box">
                         <div class="dua-label">🤲 At Maqam Ibrahim</div>
+                        <div class="dua-arabic">وَاتَّخِذُوا مِنْ مَقَامِ إِبْرَاهِيمَ مُصَلًّى</div>
                         <div class="dua-text">Wattakhidhū min maqāmi ibrāhīma muṣallā</div>
+                        <div class="dua-meaning">
+                            <span class="meaning-label">Meaning:</span> And take the standing place of Ibrahim as a place of prayer (Quran 2:125)
+                        </div>
                     </div>
                     
                     <div class="substep">
@@ -549,7 +609,11 @@
                     </div>
                     <div class="dua-box">
                         <div class="dua-label">🤲 Before Drinking Zamzam</div>
+                        <div class="dua-arabic">اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا وَاسِعًا، وَشِفَاءً مِنْ كُلِّ دَاءٍ</div>
                         <div class="dua-text">Allāhumma innī asʾaluka ʿilman nāfiʿan, wa rizqan wāsiʿan, wa shifāʾan min kulli dāʾ</div>
+                        <div class="dua-meaning">
+                            <span class="meaning-label">Meaning:</span> O Allah, I ask You for beneficial knowledge, abundant provision, and healing from every disease
+                        </div>
                     </div>
                     
                     <div class="substep">
@@ -591,7 +655,11 @@
                 </div>
                 <div class="dua-box">
                     <div class="dua-label">🤲 At Safa</div>
+                    <div class="dua-arabic">إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَّهِ</div>
                     <div class="dua-text">Innaṣ-ṣafā wal-marwata min shaʿāʾiri-llāh</div>
+                    <div class="dua-meaning">
+                        <span class="meaning-label">Meaning:</span> Indeed, Safa and Marwa are among the symbols of Allah (Quran 2:158)
+                    </div>
                 </div>
                 
                 <div class="substep">
@@ -600,7 +668,11 @@
                 </div>
                 <div class="dua-box">
                     <div class="dua-label">🤲 Beginning Sa'i</div>
+                    <div class="dua-arabic">نَبْدَأُ بِمَا بَدَأَ اللهُ بِهِ</div>
                     <div class="dua-text">Nabdaʾu bimā badaʾa Allāhu bihi</div>
+                    <div class="dua-meaning">
+                        <span class="meaning-label">Meaning:</span> We begin with what Allah began with
+                    </div>
                 </div>
                 
                 <div class="substep">
@@ -609,7 +681,11 @@
                 </div>
                 <div class="dua-box">
                     <div class="dua-label">🤲 At Safa & Marwa Hills</div>
+                    <div class="dua-arabic">اللهُ أَكْبَرُ، اللهُ أَكْبَرُ، اللهُ أَكْبَرُ. لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ. لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ</div>
                     <div class="dua-text">Allāhu akbar, Allāhu akbar, Allāhu akbar. Lā ilāha illallāhu waḥdahu lā sharīka lah, lahul-mulku walahul-ḥamdu wa huwa ʿalā kulli shayʾin qadīr. Lā ilāha illallāhu waḥdahu, anjaza waʿdah, wa naṣara ʿabdah, wa hazamal-aḥzāba waḥdah</div>
+                    <div class="dua-meaning">
+                        <span class="meaning-label">Meaning:</span> Allah is the Greatest, Allah is the Greatest, Allah is the Greatest. None has the right to be worshipped but Allah alone, Who has no partner. His is the dominion and His is the praise, and He is Able to do all things. None has the right to be worshipped but Allah alone. He fulfilled His Promise, He aided His slave, and He alone defeated the confederates.
+                    </div>
                     <div style="margin-top: 10px; font-size: 0.95em; color: #9c640c;">Then make your personal duas</div>
                 </div>
                 
@@ -685,12 +761,37 @@
             });
         }
         
-        // PWA Install Prompt
+        // PWA Install Prompt - Auto show after 3 seconds
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            document.getElementById('installPrompt').classList.add('show');
+            
+            // Auto-show install prompt after 3 seconds
+            setTimeout(() => {
+                document.getElementById('installPrompt').classList.add('show');
+            }, 3000);
         });
+        
+        // For iOS - Show custom install instructions
+        function isIOS() {
+            return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        }
+        
+        function isInStandaloneMode() {
+            return ('standalone' in window.navigator) && (window.navigator.standalone);
+        }
+        
+        // Show iOS install instructions if on iOS and not installed
+        if (isIOS() && !isInStandaloneMode()) {
+            setTimeout(() => {
+                const iosPrompt = document.getElementById('installPrompt');
+                iosPrompt.innerHTML = `
+                    <span>📱 Install this app: Tap <strong>Share ⬆️</strong> then <strong>"Add to Home Screen"</strong></span>
+                    <button class="close-prompt" onclick="document.getElementById('installPrompt').classList.remove('show')">✕</button>
+                `;
+                iosPrompt.classList.add('show');
+            }, 3000);
+        }
         
         document.getElementById('installBtn').addEventListener('click', async () => {
             if (deferredPrompt) {
