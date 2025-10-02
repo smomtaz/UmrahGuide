@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2d8659">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Umrah Guide">
+    <meta name="description" content="Complete step-by-step Umrah guide with duas">
+    <title>Umrah Guide - PWA</title>
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlVtcmFoIFNlbGYtR3VpZGUiLAogICJzaG9ydF9uYW1lIjogIlVtcmFoIiwKICAiZGVzY3JpcHRpb24iOiAiQ29tcGxldGUgc3RlcC1ieS1zdGVwIFVtcmFoIGd1aWRlIHdpdGggZHVhcyIsCiAgInN0YXJ0X3VybCI6ICIvIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMmQ4NjU5IiwKICAidGhlbWVfY29sb3IiOiAiIzJkODY1OSIsCiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJyUzRSUzQ3JlY3Qgd2lkdGg9JzEwMCcgaGVpZ2h0PScxMDAnIGZpbGw9JyUyMzJkODY1OScvJTNFJTNDdGV4dCB4PSc1MCUyNScgeT0nNTAlMjUnIGZvbnQtc2l6ZT0nNTAnIGZpbGw9J3doaXRlJyUzRSVFRiVBNyU4QiUzQy90ZXh0JTNFJTNDL3N2ZyUzRSIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJyUzRSUzQ3JlY3Qgd2lkdGg9JzEwMCcgaGVpZ2h0PScxMDAnIGZpbGw9JyUyMzJkODY1OScvJTNFJTNDdGV4dCB4PSc1MCUyNScgeT0nNTAlMjUnIGZvbnQtc2l6ZT0nNTAnIGZpbGw9J3doaXRlJyUzRSVFRiVBNyU4QiUzQy90ZXh0JTNFJTNDL3N2ZyUzRSIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0KICBdCn0=">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a5f3f 0%, #2d8659 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            display: none;
+            align-items: center;
+            gap: 15px;
+            z-index: 1000;
+            animation: slideUp 0.5s;
+        }
+        
+        .install-prompt.show {
+            display: flex;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateX(-50%) translateY(100px); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+        
+        .install-btn {
+            background: #2d8659;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .close-prompt {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .offline-indicator {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #e74c3c;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            display: none;
+            z-index: 1000;
+        }
+        
+        .offline-indicator.show {
+            display: block;
+        }
+        
+        .online-indicator {
+            background: #27ae60;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a5f3f 0%, #2d8659 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .main-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #2d8659;
+            flex-wrap: wrap;
+        }
+        
+        .main-tab-button {
+            background: #e8f4ed;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #1a5f3f;
+            border-radius: 12px 12px 0 0;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .main-tab-button:hover {
+            background: #d4ebe0;
+            transform: translateY(-2px);
+        }
+        
+        .main-tab-button.active {
+            background: #2d8659;
+            color: white;
+            border-bottom: 4px solid #2d8659;
+            margin-bottom: -4px;
+        }
+        
+        .main-tab-content {
+            display: none;
+            animation: fadeIn 0.4s;
+        }
+        
+        .main-tab-content.active {
+            display: block;
+        }
+        
+        .step-header {
+            background: linear-gradient(135deg, #f0f7f4 0%, #e8f4ed 100%);
+            padding: 20px 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            border-left: 6px solid #2d8659;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: #2d8659;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-right: 12px;
+            font-size: 1em;
+        }
+        
+        .step-title {
+            display: inline-block;
+            font-size: 2em;
+            color: #1a5f3f;
+            font-weight: bold;
+        }
+        
+        .sub-tabs {
+            display: flex;
+            gap: 5px;
+            margin: 20px 0;
+            border-bottom: 3px solid #2d8659;
+            flex-wrap: wrap;
+        }
+        
+        .sub-tab-button {
+            background: #f0f7f4;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            color: #1a5f3f;
+            border-radius: 10px 10px 0 0;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .sub-tab-button:hover {
+            background: #d4ebe0;
+        }
+        
+        .sub-tab-button.active {
+            background: #1a5f3f;
+            color: white;
+            border-bottom: 3px solid #1a5f3f;
+            margin-bottom: -3px;
+        }
+        
+        .sub-tab-content {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+        
+        .sub-tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .substep {
+            margin: 15px 0;
+            padding: 12px 15px;
+            background: #f9fafb;
+            border-radius: 8px;
+            border-left: 3px solid #2d8659;
+        }
+        
+        .substep-number {
+            display: inline-block;
+            background: #2d8659;
+            color: white;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            line-height: 25px;
+            border-radius: 50%;
+            font-size: 0.85em;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .dua-box {
+            background: linear-gradient(135deg, #fef9e7 0%, #fcf3cf 100%);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border: 2px solid #f4d03f;
+            box-shadow: 0 4px 12px rgba(244, 208, 63, 0.2);
+        }
+        
+        .dua-label {
+            font-weight: bold;
+            color: #9c640c;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .dua-text {
+            font-size: 1.15em;
+            color: #1a5f3f;
+            font-weight: 600;
+            line-height: 1.8;
+            font-style: italic;
+        }
+        
+        .note {
+            background: #e8f4fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #3498db;
+            font-size: 0.95em;
+        }
+        
+        .icon {
+            margin-right: 8px;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
+        .completion {
+            background: linear-gradient(135deg, #1a5f3f 0%, #2d8659 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .completion h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        
+        .completion p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .gender-note {
+            color: #d35400;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+        
+        .nav-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .nav-button.prev {
+            background: #e8f4ed;
+            color: #1a5f3f;
+        }
+        
+        .nav-button.next {
+            background: #2d8659;
+            color: white;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .nav-button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-indicator" id="offlineIndicator">📡 Offline Mode</div>
+    
+    <div class="install-prompt" id="installPrompt">
+        <span>📱 Install Umrah Guide app for offline access</span>
+        <button class="install-btn" id="installBtn">Install</button>
+        <button class="close-prompt" id="closePrompt">✕</button>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🕋 Umrah Self-Guide</h1>
+            <p>A Complete Step-by-Step Guide with Essential Duas</p>
+        </div>
+        
+        <div class="content">
+            <!-- MAIN TABS -->
+            <div class="main-tabs">
+                <button class="main-tab-button active" onclick="openMainTab(event, 'step1', 0)">
+                    <div>STEP 1</div>
+                    <div style="font-size: 0.85em; font-weight: 500; margin-top: 3px;">Ihram</div>
+                </button>
+                <button class="main-tab-button" onclick="openMainTab(event, 'step2', 1)">
+                    <div>STEP 2</div>
+                    <div style="font-size: 0.85em; font-weight: 500; margin-top: 3px;">Tawaf</div>
+                </button>
+                <button class="main-tab-button" onclick="openMainTab(event, 'step3', 2)">
+                    <div>STEP 3</div>
+                    <div style="font-size: 0.85em; font-weight: 500; margin-top: 3px;">Sa'i</div>
+                </button>
+                <button class="main-tab-button" onclick="openMainTab(event, 'step4', 3)">
+                    <div>STEP 4</div>
+                    <div style="font-size: 0.85em; font-weight: 500; margin-top: 3px;">Halq/Taqsir</div>
+                </button>
+            </div>
+
+            <!-- STEP 1: IHRAM -->
+            <div id="step1" class="main-tab-content active">
+                <div class="step-header">
+                    <span class="step-number">STEP 1</span>
+                    <span class="step-title">Ihram</span>
+                </div>
+                
+                <div class="substep">
+                    <span class="substep-number">1</span>
+                    Wear clean Ihram clothes and cut nails
+                </div>
+                
+                <div class="substep">
+                    <span class="substep-number">2</span>
+                    Pray 2 rakat Salah (most authentic: upon entering the masjid)
+                </div>
+                
+                <div class="substep">
+                    <span class="substep-number">3</span>
+                    Make your intention (Niyat)
+                </div>
+                <div class="dua-box">
+                    <div class="dua-label">🤲 Niyat for Umrah</div>
+                    <div class="dua-text">Labbayka Allāhumma Umrah</div>
+                </div>
+                
+                <div class="substep">
+                    <span class="substep-number">4</span>
+                    Recite Talbiyah continuously
+                </div>
+                <div class="dua-box">
+                    <div class="dua-label">🤲 Talbiyah</div>
+                    <div class="dua-text">Labbayka Allāhumma labbayk, labbayka lā sharīka laka labbayk, inna-l-ḥamda wan-niʿmata laka wal-mulk, lā sharīka lak</div>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="nav-button prev" disabled>← Previous</button>
+                    <button class="nav-button next" onclick="goToStep(1)">Next: Tawaf →</button>
+                </div>
+            </div>
+
+            <!-- STEP 2: TAWAF WITH SUB-TABS -->
+            <div id="step2" class="main-tab-content">
+                <div class="step-header">
+                    <span class="step-number">STEP 2</span>
+                    <span class="step-title">Tawaf & After</span>
+                </div>
+                
+                <div class="sub-tabs">
+                    <button class="sub-tab-button active" onclick="openSubTab(event, 'tawaf', 'step2')">🔄 Tawaf (7 Rounds)</button>
+                    <button class="sub-tab-button" onclick="openSubTab(event, 'prayer', 'step2')">🤲 Prayer</button>
+                    <button class="sub-tab-button" onclick="openSubTab(event, 'zamzam', 'step2')">💧 Zamzam</button>
+                </div>
+                
+                <!-- TAWAF SUB-TAB -->
+                <div id="tawaf" class="sub-tab-content active">
+                    <div class="substep">
+                        <span class="substep-number">1</span>
+                        Enter the Masjid with right foot
+                    </div>
+                    <div class="dua-box">
+                        <div class="dua-label">🤲 Entering Masjid Dua</div>
+                        <div class="dua-text">Allahumma-ftaḥ lī abwaba raḥmatika</div>
+                    </div>
+                    
+                    <div class="substep">
+                        <span class="substep-number">2</span>
+                        Go to the Black Stone corner (green light indicator)
+                    </div>
+                    
+                    <div class="substep">
+                        <span class="substep-number">3</span>
+                        <span class="gender-note">👨 Men only:</span> Expose right shoulder for all 7 rounds
+                    </div>
+                    
+                    <div class="substep">
+                        <span class="substep-number">4</span>
+                        Start Tawaf by pointing/touching the Black Stone
+                    </div>
+                    <div class="dua-box">
+                        <div class="dua-label">🤲 Starting Each Round</div>
+                        <div class="dua-text">Bismillāh, Allāhu akbar</div>
+                    </div>
+                    
+                    <div class="substep">
+                        <span class="substep-number">5</span>
+                        If you touched the Black Stone, kiss your hand (not otherwise)
+                    </div>
+                    
+                    <div class="substep">
+                        <span class="substep-number">6</span>
+                        Make any dua, recite Quran until you reach <span class="highlight">Rukn al-Yamani</span> (corner before Black Stone)
+                    </div>
+                    
+                    <div class="substep">
+                        <span class="substep-number">7</span>
+                        From Rukn al-Yamani to Black Stone, recite:
+                    </div>
+                    <div class="dua-box">
+                        <div class="dua-label">🤲 Between Rukn al-Yamani & Black Stone</div>
+                        <div class="dua-text">Rabbana ātinā fi-d-dunyā ḥasanah, wa fi-l-ākhirati ḥasanah, wa qinā ʿadhāba-n-nār</div>
+                    </div>
+                    
+                    <div class="note">
+                        <span class="icon">ℹ️</span> Complete 7 rounds while maintaining wudu
+                    </div>
+                    
+                    <div class="note">
+                        <span class="gender-note">👨 Men only:</span> Take quick, small jogging steps for the <span class="highlight">first 3 rounds only</span>
+                    </div>
+                </div>
+                
+                <!-- PRAYER SUB-TAB -->
+                <div id="prayer" class="sub-tab-content">
+                    <div class="substep">
+                        <span class="substep-number">1</span>
+                        After completing 7 rounds of Tawaf, go behind Maqam Ibrahim (or anywhere in Haram)
+                    </div>
+                    <div class="dua-box">
+                        <div class="dua-label">🤲 At Maqam Ibrahim</div>
+                        <div class="dua-text">Wattakhidhū min maqāmi ibrāhīma muṣallā</div>
+                    </div>
+                    
+                    <div class="substep">
+                        <span class="substep-number">2</span>
+                        Pray 2 rakat:
+                        <ul style="margin-left: 35px; margin-top: 8px;">
+                            <li><strong>1st rakʿah</strong> → Sūrat al-Kāfirūn</li>
+                            <li><strong>2nd rakʿah</strong> → Sūrat al-Ikhlāṣ</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="note">
+                        <span class="icon">✅</span> After prayer, proceed to drink Zamzam before Sa'i
+                    </div>
+                </div>
+                
+                <!-- ZAMZAM SUB-TAB -->
+                <div id="zamzam" class="sub-tab-content">
+                    <div class="substep">
+                        <span class="substep-number">1</span>
+                        Before drinking Zamzam (preferably standing), recite:
+                    </div>
+                    <div class="dua-box">
+                        <div class="dua-label">🤲 Before Drinking Zamzam</div>
+                        <div class="dua-text">Allāhumma innī asʾaluka ʿilman nāfiʿan, wa rizqan wāsiʿan, wa shifāʾan min kulli dāʾ</div>
+                    </div>
+                    
+                    <div class="substep">
+                        <span class="substep-number">2</span>
+                        Drink the Zamzam water
+                    </div>
+                    
+                    <div class="substep">
+                        <span class="substep-number">3</span>
+                        Pour some Zamzam on yourself or rub on head and neck
+                    </div>
+                    
+                    <div class="substep">
+                        <span class="substep-number">4</span>
+                        If possible, go to Black Stone and touch it before proceeding to Sa'i
+                    </div>
+                    
+                    <div class="note">
+                        <span class="icon">➡️</span> Now proceed to Sa'i (Step 3)
+                    </div>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="nav-button prev" onclick="goToStep(0)">← Previous: Ihram</button>
+                    <button class="nav-button next" onclick="goToStep(2)">Next: Sa'i →</button>
+                </div>
+            </div>
+
+            <!-- STEP 3: SAI -->
+            <div id="step3" class="main-tab-content">
+                <div class="step-header">
+                    <span class="step-number">STEP 3</span>
+                    <span class="step-title">Sa'i (7 Laps)</span>
+                </div>
+                
+                <div class="substep">
+                    <span class="substep-number">1</span>
+                    Start at Safa, face the Kaaba and say:
+                </div>
+                <div class="dua-box">
+                    <div class="dua-label">🤲 At Safa</div>
+                    <div class="dua-text">Innaṣ-ṣafā wal-marwata min shaʿāʾiri-llāh</div>
+                </div>
+                
+                <div class="substep">
+                    <span class="substep-number">2</span>
+                    Then say:
+                </div>
+                <div class="dua-box">
+                    <div class="dua-label">🤲 Beginning Sa'i</div>
+                    <div class="dua-text">Nabdaʾu bimā badaʾa Allāhu bihi</div>
+                </div>
+                
+                <div class="substep">
+                    <span class="substep-number">3</span>
+                    Make Takbir and personal dua:
+                </div>
+                <div class="dua-box">
+                    <div class="dua-label">🤲 At Safa & Marwa Hills</div>
+                    <div class="dua-text">Allāhu akbar, Allāhu akbar, Allāhu akbar. Lā ilāha illallāhu waḥdahu lā sharīka lah, lahul-mulku walahul-ḥamdu wa huwa ʿalā kulli shayʾin qadīr. Lā ilāha illallāhu waḥdahu, anjaza waʿdah, wa naṣara ʿabdah, wa hazamal-aḥzāba waḥdah</div>
+                    <div style="margin-top: 10px; font-size: 0.95em; color: #9c640c;">Then make your personal duas</div>
+                </div>
+                
+                <div class="substep">
+                    <span class="substep-number">4</span>
+                    Repeat step 3 <span class="highlight">two more times</span> (total 3 times), then start walking with dhikr and Quran
+                </div>
+                
+                <div class="note">
+                    <span class="gender-note">👨 Men only</span> (some opinions: women too): Run between the green lights
+                </div>
+                
+                <div class="substep">
+                    <span class="substep-number">5</span>
+                    Upon reaching Marwa, repeat steps 3-4
+                </div>
+                
+                <div class="substep">
+                    <span class="substep-number">6</span>
+                    Continue until completing <span class="highlight">7 laps</span> (Safa to Marwa = 1, Marwa to Safa = 2, etc.)
+                </div>
+                
+                <div class="note">
+                    <span class="icon">ℹ️</span> At the end, simply finish - no special dua required
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="nav-button prev" onclick="goToStep(1)">← Previous: Tawaf</button>
+                    <button class="nav-button next" onclick="goToStep(3)">Next: Halq/Taqsir →</button>
+                </div>
+            </div>
+
+            <!-- STEP 4: HALQ/TAQSIR -->
+            <div id="step4" class="main-tab-content">
+                <div class="step-header">
+                    <span class="step-number">STEP 4</span>
+                    <span class="step-title">Halq/Taqsir</span>
+                </div>
+                
+                <div class="substep">
+                    <span class="substep-number">1</span>
+                    Trim or shave your hair
+                </div>
+                
+                <div class="note" style="background: #e8f8f5; border-left-color: #2d8659;">
+                    <span class="icon">✅</span> You have now exited the state of Ihram
+                </div>
+                
+                <!-- COMPLETION MESSAGE -->
+                <div class="completion">
+                    <h2>🎉 Congratulations!</h2>
+                    <p>You have completed your Umrah!</p>
+                    <p style="margin-top: 10px; font-size: 1.1em;">May Allah accept your Umrah and grant all your duas!</p>
+                    <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.9;">تَقَبَّلَ اللهُ مِنَّا وَمِنْكُم</p>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="nav-button prev" onclick="goToStep(2)">← Previous: Sa'i</button>
+                    <button class="nav-button next" disabled>Completed ✓</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentStep = 0;
+        let deferredPrompt;
+        
+        // Simple caching for offline support
+        if ('caches' in window) {
+            caches.open('umrah-guide-v1').then(cache => {
+                cache.addAll([window.location.href]);
+            });
+        }
+        
+        // PWA Install Prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installPrompt').classList.add('show');
+        });
+        
+        document.getElementById('installBtn').addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    document.getElementById('installPrompt').classList.remove('show');
+                }
+                deferredPrompt = null;
+            }
+        });
+        
+        document.getElementById('closePrompt').addEventListener('click', () => {
+            document.getElementById('installPrompt').classList.remove('show');
+        });
+        
+        // Online/Offline indicator
+        window.addEventListener('online', () => {
+            const indicator = document.getElementById('offlineIndicator');
+            indicator.textContent = '✅ Online';
+            indicator.classList.add('online-indicator');
+            indicator.classList.add('show');
+            setTimeout(() => indicator.classList.remove('show'), 2000);
+        });
+        
+        window.addEventListener('offline', () => {
+            const indicator = document.getElementById('offlineIndicator');
+            indicator.textContent = '📡 Offline Mode';
+            indicator.classList.remove('online-indicator');
+            indicator.classList.add('show');
+        });
+        
+        function openMainTab(evt, tabName, stepIndex) {
+            var i, tabContent, tabButtons;
+            
+            tabContent = document.getElementsByClassName("main-tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].classList.remove("active");
+            }
+            
+            tabButtons = document.getElementsByClassName("main-tab-button");
+            for (i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+            currentStep = stepIndex;
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function openSubTab(evt, tabName, parentStep) {
+            var parent = document.getElementById(parentStep);
+            var subTabContents = parent.getElementsByClassName("sub-tab-content");
+            var subTabButtons = parent.getElementsByClassName("sub-tab-button");
+            
+            for (var i = 0; i < subTabContents.length; i++) {
+                subTabContents[i].classList.remove("active");
+            }
+            
+            for (var i = 0; i < subTabButtons.length; i++) {
+                subTabButtons[i].classList.remove("active");
+            }
+            
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+        
+        function goToStep(stepIndex) {
+            var stepNames = ['step1', 'step2', 'step3', 'step4'];
+            var mainTabButtons = document.getElementsByClassName("main-tab-button");
+            
+            var tabContent = document.getElementsByClassName("main-tab-content");
+            for (var i = 0; i < tabContent.length; i++) {
+                tabContent[i].classList.remove("active");
+            }
+            
+            for (var i = 0; i < mainTabButtons.length; i++) {
+                mainTabButtons[i].classList.remove("active");
+            }
+            
+            document.getElementById(stepNames[stepIndex]).classList.add("active");
+            mainTabButtons[stepIndex].classList.add("active");
+            currentStep = stepIndex;
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
